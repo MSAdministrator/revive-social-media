@@ -1,0 +1,43 @@
+#          YAML Reference Guide: https://www.appveyor.com/docs/appveyor-yml/
+# Environmental Variables Guide: https://www.appveyor.com/docs/environment-variables/
+#                YAML Validator: https://ci.appveyor.com/tools/validate-yaml
+
+# Disable automatic builds
+# Without this, the following error shows up:
+# "Specify a project or solution file. The directory does not contain a project or solution file."
+build: off
+
+# Version number
+version: 1.0.0.{build}
+
+# Ignore testing a commit if only the README.md file changed
+# Or if various strings are found in the commit message: updated readme, update readme, update docs, update version, update appveyor
+skip_commits:
+  files:
+    - README.md
+  message: /updated readme.*|update readme.*s|update docs.*|update version.*|update appveyor.*/
+
+# There's no need to alter the build number for a Pull Request (PR) since they don't modify anything
+pull_requests:
+  do_not_increment_build_number: true
+
+#Publish to PowerShell Gallery with this key
+environment:
+  TwitterAPIKey:
+    secure: T2bzCt5tixDJOZAr9tKvfFADNSmsSoo1MRmSc7ZSOi4=
+  TwitterAPISecretKey:
+    secure: J1/yUMcdB8A0VMBqIFlSC8lbxWcQyUDHKTr3eZWMHGIfxNrhfO4vFlT86PTqmO0QKQfe/HEsSZfwT+HoW0u/nQ==
+  TwitterAccessToken:
+    secure: wqBNHedxOUDZb6g1PbG+Ewx5kGxzYBsRXqzyKlOwRfekw/vNaMp2xEjII6PJJPPHf1TMs7ThbnLVjhQrRYUtQw==
+  TwitterAccessTokenSecret:
+    secure: epjLrmVSrzKq9ZYklfLtIKHuPTZaVZa8XId/cX9xfFbmevRYlZQBmhsChhqB2DYq
+
+# Install NuGet to interact with the PowerShell Gallery
+install:
+  - ps: |
+      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+      $RevivePost = Invoke-RestMethod -Uri 'https://msadministrator.github.io/article/index.xml' | Get-Random
+      Install-Module -Name PoshTwit -Force -Verbose 
+      $TweetContent = "Blog Archive: " + $RevivePost.title + " " + $RevivePost.link
+      $Tweet = @{ConsumerKey = $env:TwitterAPIKey; ConsumerSecret = $env:TwitterAPISecretKey; AccessToken = $env:TwitterAccessToken; AccessSecret = $env:TwitterAccessTokenSecret; Tweet = $TweetContent;}
+      Publish-Tweet @Tweet
