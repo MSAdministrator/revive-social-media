@@ -19,7 +19,7 @@ jobs:
     - name: Install requirements
       run: pip3 install -r requirements.txt
     - name: Install Python Package
-      run: python3 setup.py install
+      run: python3 setup.py install --user
     - name: Run script
       env: # Or as an environment variable
         TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
