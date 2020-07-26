@@ -32,4 +32,4 @@ jobs:
         LINKEDIN_USERNAME: ${{ secrets.LINKEDIN_USERNAME }}
         LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
         LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
-      run: python3 main.py blog
+      run: python3 main.py oss
