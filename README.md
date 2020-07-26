@@ -1,19 +1,19 @@
-![CI](https://github.com/MSAdministrator/revive-open-source-projects/workflows/CI/badge.svg)
+![CI](https://github.com/MSAdministrator/revive-social-media/workflows/CI/badge.svg)
 
-# Revive Open Source Projects
+# Revive Social Media
 
-My original path for automating the `reviving` of older blog posts was using AppVeyor in a CI pipeline within a GitHub repository.  You can find details about this process here: https://letsautomate.it/article/using-github-to-revive-blog-posts/
+My original path for automating the `reviving` of older blog posts & Open Source Projects I develop was using AppVeyor in a CI pipeline within a GitHub repository.  You can find details about this process here: https://letsautomate.it/article/using-github-to-revive-blog-posts/
 
-Recently I wanted to also share out, randomly and on a scheduled basis, open-source projects i've built over the years and decided to try out GitHub Actions.
+Recently I wanted to also share out, randomly and on a scheduled basis, open-source projects & blog posts to both Twitter & LinkedIn.  This repository contains Python code to do just that using GitHub Actions.
 
-## Using GitHub Actions to Post to Twitter
+## Using GitHub Actions to Post to Twitter & LinkedIn
 
-> You can find my repository of code here: https://github.com/MSAdministrator/revive-open-source-projects
+This repository contains code to revive or re-share blog posts & open-source projects to Twitter & LinkedIn on a scheduled basis.  There are two workflow files.  blogs.yml and projects.yml
 
-This new method is actually using Python and will run on a scheduled basis.  The schedule is based on a cron job defined within my GitHub Action workflow. [Workflow Yaml](
-.github/workflows/main.yml)
+This new method is actually using Python and will run on a scheduled basis.  The schedule is based on a cron job defined within my GitHub Action workflow. [Blogs Yaml](
+.github/workflows/blogs.yml) & [Projects Yaml](.github/workflows/projects.yml)
 
-This yml file is below with comments explaining the process:
+An example can be found below yml file is below with comments explaining the process:
 
 ```yaml
 name: CI
@@ -49,6 +49,10 @@ jobs:
 
 If you read the previous blog post you will know you need to create an App in Twitter and then generate a Token, Secret Key, Access Token, and Access Secret keys in order to use and post to Twitter via their APIs.
 
+For LinkedIn, you must authenticate using OAuth2.  Please read the documentation about [Signing In with LinkedIn](https://docs.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/sign-in-with-linkedin?context=linkedin/consumer/context) for more information.
+
+You will need to generate a `client_id` and `client_secret` from LinkedIn.  Additionally, if you want this process to automatically authenticate you via a browser using their `Client Credential Grant Flow` (which requires selenium & chromedriver to be installed) then you must provide your username & password to linkedin as well.  If not, then generate an `access_token` and provide this.
+
 Once you have done that then you need to store them in your GitHub account (DO NOT STORE THEM IN THE CLEAR!)
 
 You can find info here about this process: https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
@@ -60,6 +64,11 @@ TWITTER_TOKEN = ''
 TWITTER_SECRET_KEY = ''
 TWITTER_ACCESS_TOKEN = ''
 TWITTER_ACCESS_SECRET = ''
+LINKEDIN_CLIENT_ID = ''
+LINKEDIN_CLIENT_SECRET = ''
+LINKEDIN_USERNAME = ''
+LINKEDIN_PASSWORD = ''
+LINKEDIN_ACCESS_TOKEN = '' # Optional
 ```
 
 ## The Code
@@ -69,8 +78,4 @@ This project utilizes Python to parse a given HTML page and create formatted twi
 This code is specifically looking for certain pieces of information within the HTML content so you will need to modify it to fit your needs.  
 
 To start, modify the `get_data()` method to retrieve the data you want.  Next you will need to modify how the data is formatted as well, but I leave this all to you.
-
-## TODO
-
-This currently only supports Twitter but I am working on a process that will also post to LinkedIn but this is becoming a challenge working with their team at this time.  I will update this when that is complete (or not).
 
