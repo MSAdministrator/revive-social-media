@@ -1,6 +1,7 @@
 import fire
 from revivesocialmedia import ReviveSocialMedia
 
+
 def main():
     fire.Fire(ReviveSocialMedia())
 

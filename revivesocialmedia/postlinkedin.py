@@ -31,7 +31,6 @@ class PostLinkedIn(object):
         )
 
     def authorization_code_flow(self, authorization_code):
-        print(authorization_code)
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
