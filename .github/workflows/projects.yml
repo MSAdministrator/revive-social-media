@@ -16,7 +16,9 @@ jobs:
       with:
         python-version: '3.7.*' # Version range or exact version of a Python version to use, using SemVer's version range syntax
     - name: Install chromium-chromedriver
-      run: sudo apt-get install chromium-chromedriver
+      run: |
+        sudo apt update
+        sudo apt-get install chromium-chromedriver
     - name: Install requirements
       run: pip3 install -r requirements.txt
     - name: Install Python Package
