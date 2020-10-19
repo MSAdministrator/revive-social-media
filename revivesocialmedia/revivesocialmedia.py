@@ -6,8 +6,8 @@ from .postlinkedin import PostLinkedIn
 
 class ReviveSocialMedia:
 
-    _OSS_MESSAGE = 'OSS Project: {name} is {description}. Check it out! {url}'
-    _BLOG_MESSAGE = 'Blog Post: {name}. Check it out! {url}'
+    _OSS_MESSAGE = 'OSS Project: {name} is {description}. Check it out! {url} #reviveposts'
+    _BLOG_MESSAGE = 'Blog Post: {name}. Check it out! {url} #reviveposts'
 
     def blog(self):
         random_blog = BlogPosts().get()
