@@ -21,6 +21,9 @@ class Browser:
         sign_in = browser.find_element_by_xpath("//button[@type='submit']")
         sign_in.click()
         time.sleep(5)
-        allow = browser.find_element_by_id("oauth__auth-form__submit-btn")
-        allow.click()
+        try:
+            allow = browser.find_element_by_id("oauth__auth-form__submit-btn")
+            allow.click()
+        except:
+            pass
         return browser.current_url.split('?code=')[1].split('&state=')[0]
