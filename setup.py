@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='revivesocialmedia',
-    version='0.0.1',
+    version='0.0.2',
     packages=find_packages(exclude=['tests*']),
     license='MIT',
     description='A Python package to revive blog posts & personal projects to Twitter & LinkedIn',
