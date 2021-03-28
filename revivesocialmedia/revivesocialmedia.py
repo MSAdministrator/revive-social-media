@@ -17,13 +17,19 @@ class ReviveSocialMedia:
                 url=random_blog['link']
             )
             PostTweet().post(message)
+        except:
+            print("Error posting to Twitter")
+            pass
+        try:
             PostLinkedIn().post(
                 message,
                 random_blog['title'],
                 random_blog['link']
             )
         except:
-            self.blog()
+            print("Error posting to LinkedIn")
+            pass
+            #self.blog()
 
     def oss(self):
         random_project = OpenSourceProjects().get()
@@ -36,10 +42,16 @@ class ReviveSocialMedia:
             if 'type' in random_project:
                 tweet = tweet + ' #{}'.format(random_project['type'])
             PostTweet().post(tweet)
+        except:
+            print("Error posting to Twitter")
+            pass
+        try:
             PostLinkedIn().post(
                 tweet, 
                 random_project['name'],
                 random_project['url']
             )
         except:
-            self.oss()
+            print("Error posting to LinkedIn")
+            pass
+            #self.oss()
