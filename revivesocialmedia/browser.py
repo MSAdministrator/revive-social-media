@@ -12,7 +12,8 @@ class Browser:
         self.password = password
 
     def run(self, url):
-        browser = webdriver.Chrome()
+        from chromedriver_py import binary_path # this will get you the path variable
+        browser = webdriver.Chrome(executable_path=binary_path)
         browser.get(url)
         username = browser.find_element_by_id('username')
         username.send_keys(self.username)
