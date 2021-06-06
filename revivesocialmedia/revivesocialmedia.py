@@ -33,8 +33,8 @@ class ReviveSocialMedia:
 
     def oss(self):
         random_project = OpenSourceProjects().get()
+        tweet = self._OSS_MESSAGE.format(name=random_project['name'], description=random_project['description'], url=random_project['url'])
         try:
-            tweet = self._OSS_MESSAGE.format(name=random_project['name'], description=random_project['description'], url=random_project['url'])
             if 'documentation' in random_project:
                 tweet = tweet + ' Docs: {}'.format(random_project['documentation'])
             if 'repository' in random_project:
