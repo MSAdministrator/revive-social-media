@@ -36,11 +36,11 @@ class ReviveSocialMedia:
         tweet = self._OSS_MESSAGE.format(name=random_project['name'], description=random_project['description'], url=random_project['url'])
         try:
             if 'documentation' in random_project:
-                tweet = tweet + ' Docs: {}'.format(random_project['documentation'])
+                tweet = tweet + ' Docs: {}'.format(random_project.get('documentation',''))
             if 'repository' in random_project:
-                tweet = tweet + ' Repo: {}'.format(random_project['repository'])
+                tweet = tweet + ' Repo: {}'.format(random_project.get('repository',''))
             if 'type' in random_project:
-                tweet = tweet + ' #{}'.format(random_project['type'])
+                tweet = tweet + ' #{}'.format(random_project.get('type',''))
             PostTweet().post(tweet)
         except:
             print("Error posting to Twitter")
