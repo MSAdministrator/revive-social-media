@@ -20,15 +20,17 @@ class OpenSourceProjects(object):
                         if 'http' not in li.a.text:
                             return_dict['name'] = li.a.text
                             return_dict['url'] = li.a['href']
-                        for l in li.find_all('li'):
-                            if 'Type:' in l.text:
-                                return_dict['type'] = l.text.replace('Type:','').strip()
-                            elif 'Documentation:' in l.text:
-                                return_dict['documentation'] = l.text.replace('Documentation:','').strip()
-                            elif 'Package Repository:' in l.text:
-                                return_dict['repository'] = l.text.replace('Package Repository:','').strip()
-                            else:
-                                return_dict['description'] = l.text
+                        if not li.find_all('li'):
+                            continue
                         if return_dict:
+                            for l in li.find_all('li'):
+                                if 'Type:' in l.text:
+                                    return_dict['type'] = l.text.replace('Type:','').strip()
+                                elif 'Documentation:' in l.text:
+                                    return_dict['documentation'] = l.text.replace('Documentation:','').strip()
+                                elif 'Package Repository:' in l.text:
+                                    return_dict['repository'] = l.text.replace('Package Repository:','').strip()
+                                else:
+                                    return_dict['description'] = l.text
                             self._PROJECT_LIST.append(return_dict)
         return random.choice(self._PROJECT_LIST)
