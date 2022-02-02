@@ -2,6 +2,7 @@
 
 # Revive Social Media
 
+
 My original path for automating the `reviving` of older blog posts & Open Source Projects I develop was using AppVeyor in a CI pipeline within a GitHub repository.  You can find details about this process here: https://letsautomate.it/article/using-github-to-revive-blog-posts/
 
 Recently I wanted to also share out, randomly and on a scheduled basis, open-source projects & blog posts to both Twitter & LinkedIn.  This repository contains Python code to do just that using GitHub Actions.
